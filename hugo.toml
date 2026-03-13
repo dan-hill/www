@@ -1,9 +1,41 @@
-title = 'Example WWW'
-baseURL = 'http://localhost:1313/'
-disableKinds = ['taxonomy', 'term']
+title = "danhill.us"
+baseURL = "http://localhost:1313/"
+disableKinds = ["taxonomy", "term"]
 
 [module]
-workspace = 'off'
+workspace = "off"
 
 [[module.imports]]
-path = 'github.com/dan-hill/site-base'
+path = "github.com/dan-hill/site-base"
+
+[params]
+description = "Landing node for work, dispatches, and docs."
+
+[params.ox]
+mode = "landing"
+
+  [params.ox.hero]
+  eyebrow = "landing node"
+  title = "danhill.us"
+  description = "Primary routing surface for work, notes, outbound links, and the living docs stack."
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 10
+  [menu.main.params]
+  note = "What this node is and what it points to."
+
+[[menu.main]]
+name = "Dispatches"
+url = "/posts/"
+weight = 20
+  [menu.main.params]
+  note = "Short posts, updates, and project traces."
+
+[[menu.main]]
+name = "Docs"
+url = "https://docs.danhill.us/"
+weight = 30
+  [menu.main.params]
+  note = "Living project documentation and working notes."
