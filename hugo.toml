@@ -1,0 +1,9 @@
+title = 'Example WWW'
+baseURL = 'http://localhost:1313/'
+disableKinds = ['taxonomy', 'term']
+
+[module]
+workspace = 'off'
+
+[[module.imports]]
+path = 'github.com/dan-hill/site-base'
