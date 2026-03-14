@@ -20,6 +20,13 @@ mode = "landing"
   description = "Primary routing surface for work, notes, outbound links, and the living docs stack."
 
 [[menu.main]]
+name = "Projects"
+url = "/projects/"
+weight = 5
+  [menu.main.params]
+  note = "Dense project index with status, links, and notes."
+
+[[menu.main]]
 name = "About"
 url = "/about/"
 weight = 10

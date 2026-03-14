@@ -32,3 +32,27 @@ For that workflow to succeed after the new OX integration, OpenClaw must first e
 4. the resulting `go.mod` and `go.sum` updates are committed before Pages deploy runs
 
 Because OX ships precompiled runtime CSS, the current Pages workflow does not need Hugo extended just to render the shared theme.
+
+### Shared presentation source of truth
+
+`www` is no longer the canonical source of the `ASPHALT//INDEX` presentation layer.
+
+The shared implementation now lives in:
+
+- `github.com/dan-hill/ox`
+
+See `~/src/ox/README.md` for the shared theme behavior, params, defaults, project model, and Unifont handling.
+
+### Consumer-local responsibilities
+
+`www` keeps only site-specific concerns:
+
+- home/project content in `content/`
+- menu/config choices in `hugo.toml`
+- the `/projects/` content scaffold at `content/projects/_index.md`
+
+Project entries authored for `www` should use the shared canonical field:
+
+- `project_kind`
+
+The legacy alias `kind` remains supported by the shared theme for backward compatibility.
