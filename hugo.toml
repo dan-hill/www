@@ -13,11 +13,22 @@ description = "Landing node for work, dispatches, and docs."
 
 [params.ox]
 mode = "landing"
-
-  [params.ox.hero]
-  eyebrow = "landing node"
-  title = "danhill.us"
-  description = "Primary routing surface for work, notes, outbound links, and the living docs stack."
+tagline = "PUBLIC BBS / DISPATCH BOARD / PROJECT SWITCH"
+footer_line = "PUBLISHED WITH HUGO // ORG -> OX-HUGO // NODE -> DANHILL.US"
+masthead_ascii = [
+  '    ___   _____ ____  __  __    _    __    ____  __',
+  '   / _ | / ___// __ \/ / / /   / |  / /   /  _/ |/ /',
+  '  / __ |/ /__ / /_/ / /_/ /   /  |_/ /   _/ //    / ',
+  ' /_/ |_|\___/ \____/\____/   /_/|___/   /___/_/|_/  ',
+  ' [ PUBLIC BBS // PROJECT SWITCH // SIGNAL BOARD ]',
+]
+masthead_ascii_compact = ["[ DANHILL.US :: SIGNAL BOARD ]"]
+landing_routes = [
+  { label = "PROJECT INDEX", url = "/projects/", note = "Shipped, building, lab, and archive work in dense operator rows." },
+  { label = "DISPATCHES", url = "/posts/", note = "Short field notes, release traces, and station logs." },
+  { label = "DOCS", url = "https://docs.danhill.us/", note = "Manuals, maps, and maintenance references." },
+  { label = "ABOUT", url = "/about/", note = "What this node is trying to be and how it is wired." },
+]
 
 [[menu.main]]
 name = "Projects"
