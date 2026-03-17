@@ -5,17 +5,20 @@
 }
 
 :root {
-  --bg: #0a0a0a;
-  --fg: #d8d8d8;
-  --muted: #8f8f8f;
-  --line: #2d2d2d;
-  --accent: #a8ff60;
-  --accent-dim: #6da43b;
-  --selection: #1d3110;
+  --bg: #07040d;
+  --fg: #f3eaff;
+  --muted: #8f7aa8;
+  --line: #312147;
+  --accent: #00f7ff;
+  --accent-dim: #00a7b0;
+  --selection: #2a0f3a;
+  --magenta: #ff4fd8;
+  --violet: #b388ff;
 }
 
 * { box-sizing: border-box; }
 html { background: var(--bg); color: var(--fg); }
+html { text-shadow: 0 0 0 transparent; }
 body {
   margin: 0;
   background: var(--bg);
@@ -90,18 +93,20 @@ samp {
 .term-ascii {
   color: var(--accent);
   overflow-x: auto;
+  text-shadow: 0 0 8px rgba(0,247,255,0.18);
 }
 
 .term-ascii--hero {
   border: 1px solid var(--line);
   padding: 0.5rem 1ch;
+  box-shadow: inset 0 0 0 1px rgba(255,79,216,0.12);
 }
 
 .term-meta,
 .term-empty,
 .term-index,
 .term-date {
-  color: var(--muted);
+  color: var(--violet);
 }
 
 .term-prompt { color: var(--accent); }
@@ -169,7 +174,7 @@ samp {
   height: auto;
   filter: grayscale(1) contrast(1.1);
 }
-.term-prose :not(pre) > code { color: var(--accent); }
+.term-prose :not(pre) > code { color: var(--magenta); }
 .term-prose pre {
   padding: 0.75rem 1ch;
   border: 1px solid var(--line);
@@ -210,7 +215,7 @@ samp {
 .term-panel__title {
   display: block;
   margin-bottom: 0.5rem;
-  color: var(--accent);
+  color: var(--magenta);
 }
 
 .term-callout--note,
@@ -235,9 +240,10 @@ samp {
 .term-button {
   display: inline-block;
   margin: 0 0 1rem;
-  color: var(--accent);
+  color: var(--magenta);
   border: 1px solid var(--line);
   padding: 0.35rem 1ch;
+  box-shadow: inset 0 0 0 1px rgba(0,247,255,0.10);
 }
 
 .term-button:hover {
