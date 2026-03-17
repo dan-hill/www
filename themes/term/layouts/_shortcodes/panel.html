@@ -1,0 +1,4 @@
+<div class="term-panel">
+  {{ with .Get "title" }}<strong class="term-panel__title">{{ . }}</strong>{{ end }}
+  <div class="term-panel__body">{{ .Inner | markdownify }}</div>
+</div>

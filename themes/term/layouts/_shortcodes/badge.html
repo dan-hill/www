@@ -1,0 +1,2 @@
+{{ $tone := .Get "tone" | default "default" }}
+<span class="term-badge term-badge--{{ $tone }}">{{ .Inner | markdownify }}</span>
