@@ -1,10 +1,3 @@
-{{ $nav := site.Menus.main }}
 <header class="term-block term-header">
 <pre class="term-ascii">SITE://DANHILL.US  MODE://TEXT  FEED://ONLINE</pre>
-  <p class="term-meta">
-    <a href="{{ "/" | relURL }}">home</a>
-    {{ range $nav }} | <a href="{{ .URL }}">{{ .Name | lower }}</a>{{ end }}
-    {{ with .OutputFormats.Get "rss" }} | <a href="{{ .RelPermalink }}">rss</a>{{ end }}
-  </p>
-  <p class="term-prompt">$ help</p>
 </header>
