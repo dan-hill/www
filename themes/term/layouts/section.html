@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="term-block">
+  <pre class="term-label">== {{ .Title | upper }} ==</pre>
+  <p class="term-meta">PATH {{ .RelPermalink }} | KIND {{ .Kind | upper }} | COUNT {{ len .Pages }}</p>
+  {{ with .Content }}
+  <div class="term-prose">{{ . }}</div>
+  {{ end }}
+</section>
+
+<section class="term-block">
+  <pre class="term-label">== ENTRIES ==</pre>
+  {{ $pages := .Pages.ByDate.Reverse }}
+  {{ if gt (len $pages) 0 }}
+  <ul class="term-list">
+    {{ range $i, $page := $pages }}
+    <li>
+      <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
+      <a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ $page.Date.Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="term-empty">No entries found.</p>
+  {{ end }}
+</section>
+{{ end }}

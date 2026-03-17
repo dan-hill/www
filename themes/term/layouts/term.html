@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="term-block">
+  <pre class="term-label">== TERM ==</pre>
+  <h1 class="term-title">{{ .Title }}</h1>
+  <p class="term-meta">{{ len .Pages }} matching entries</p>
+  <ul class="term-list">
+    {{ range $i, $p := .Pages.ByDate.Reverse }}
+    <li>
+      <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
+      <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ $p.Date.Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

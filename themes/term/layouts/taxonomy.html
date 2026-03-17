@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="term-block">
+  <pre class="term-label">== TAXONOMY ==</pre>
+  <h1 class="term-title">{{ .Title }}</h1>
+  <ul class="term-list">
+    {{ range $i, $p := .Pages.ByTitle }}
+    <li>
+      <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
+      <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

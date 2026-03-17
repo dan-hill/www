@@ -1,7 +1,7 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'OX Example Site'
-theme = 'ox'
+title = 'TERM Example Site'
+theme = 'term'
 enableRobotsTXT = true
 summaryLength = 24
 
@@ -22,7 +22,7 @@ category = 'categories'
   ordered = false
 
 [params]
-description = 'High-neon mono Hugo theme demo for blog and docs-lite content.'
+description = 'Text-only terminal Hugo theme with 80-column centered layout and Unifont.'
 
   [params.ox]
     [params.ox.hero]

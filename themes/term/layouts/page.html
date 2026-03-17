@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article class="term-block">
+  <pre class="term-label">== PAGE ==</pre>
+  <h1 class="term-title">{{ .Title }}</h1>
+  <p class="term-meta">PATH {{ .RelPermalink }}{{ with .Date }} | DATE {{ .Format "2006-01-02" }}{{ end }}</p>
+  <div class="term-prose">{{ .Content }}</div>
+</article>
+{{ end }}

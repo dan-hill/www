@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="term-block">
+  <pre class="term-label">== {{ .Kind | upper }} ==</pre>
+  <h1 class="term-title">{{ .Title }}</h1>
+  <p class="term-meta">PATH {{ .RelPermalink }}{{ with .Section }} | SECTION {{ . | upper }}{{ end }}{{ with .Date }} | DATE {{ .Format "2006-01-02" }}{{ end }}</p>
+  {{ with .Params.tags }}
+  <p class="term-meta">TAGS {{ delimit . ", " }}</p>
+  {{ end }}
+  <div class="term-prose">{{ .Content }}</div>
+</article>
+{{ end }}
