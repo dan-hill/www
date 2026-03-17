@@ -1,15 +1,10 @@
 {{ $nav := site.Menus.main }}
 <header class="term-block term-header">
 <pre class="term-ascii">SITE://DANHILL.US  MODE://TEXT  FEED://ONLINE</pre>
-  <p class="term-meta">{{ site.Title }} | THEME TERM | WIDTH 80 | STATIC YES</p>
+  <p class="term-meta">
+    <a href="{{ "/" | relURL }}">home</a>
+    {{ range $nav }} | <a href="{{ .URL }}">{{ .Name | lower }}</a>{{ end }}
+    {{ with .OutputFormats.Get "rss" }} | <a href="{{ .RelPermalink }}">rss</a>{{ end }}
+  </p>
   <p class="term-prompt">$ help</p>
-  <nav class="term-nav" aria-label="Main navigation">
-    <ul>
-      <li><a href="{{ "/" | relURL }}">home</a></li>
-      {{ range $nav }}
-      <li><a href="{{ .URL }}">{{ .Name | lower }}</a></li>
-      {{ end }}
-      {{ with .OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">rss</a></li>{{ end }}
-    </ul>
-  </nav>
 </header>
