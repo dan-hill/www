@@ -1,16 +1,6 @@
 {{ $pages := where site.RegularPages "Section" "posts" }}
 {{ $docs := where site.RegularPages "Section" "docs" }}
 <section class="term-block">
-<pre class="term-ascii term-ascii--hero">
-+------------------------------------------------------------------------------+
-| {{ printf "%-76s" (printf "%s" (site.Title | upper)) }} |
-| {{ printf "%-76s" "TEXT MODE INTERFACE // 80 COLUMN TERMINAL PRESENTATION" }} |
-+------------------------------------------------------------------------------+
-</pre>
-  {{ with .Content }}<div class="term-prose">{{ . }}</div>{{ end }}
-</section>
-
-<section class="term-block">
   <pre class="term-label">== ROUTES ==</pre>
   <ul class="term-list">
     <li><span class="term-index">01.</span><a href="{{ "/posts/" | relURL }}">posts</a><span class="term-dots"></span><span class="term-date">journal / dispatches</span></li>
