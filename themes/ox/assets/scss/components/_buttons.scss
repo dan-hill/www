@@ -1,0 +1,29 @@
+.ox-button,
+.ox-content .ox-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ox-text-secondary);
+  text-decoration: none;
+  font-size: $font-size--1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ox-button::before {
+  content: "//";
+  color: var(--ox-accent-primary);
+}
+
+.ox-button:hover,
+.ox-button:focus-visible {
+  color: #f3f3f3;
+}
+
+.ox-button--ghost {
+  color: var(--ox-text-muted);
+}

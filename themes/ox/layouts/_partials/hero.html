@@ -1,0 +1,8 @@
+{{ $hero := site.Params.ox.hero }}
+<section class="ox-hero">
+  <div class="ox-hero__masthead">
+    <p class="ox-hero__eyebrow">{{ with $hero.eyebrow }}{{ . }}{{ else }}Signal lock acquired{{ end }}</p>
+    <h1>{{ with $hero.title }}{{ . }}{{ else }}{{ site.Title }}{{ end }}</h1>
+  </div>
+  <p class="ox-hero__lede">{{ with $hero.description }}{{ . }}{{ else }}{{ with site.Params.description }}{{ . }}{{ else }}Dense mono publishing for notes, docs, and project dispatch.{{ end }}{{ end }}</p>
+</section>

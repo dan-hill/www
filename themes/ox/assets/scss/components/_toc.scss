@@ -1,0 +1,32 @@
+.ox-toc {
+  position: sticky;
+  top: 2.5rem;
+  padding: $space-md 0;
+  border-top: 1px solid var(--ox-border-subtle);
+  background: transparent;
+}
+
+.ox-toc h2 {
+  font-size: $font-size--1;
+  letter-spacing: 0.16em;
+}
+
+.ox-toc nav ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ox-toc nav ul ul {
+  margin-top: $space-xs;
+  padding-left: $space-md;
+}
+
+.ox-toc nav li + li {
+  margin-top: $space-xs;
+}
+
+.ox-toc a {
+  color: var(--ox-text-secondary);
+  text-decoration: none;
+  font-size: $font-size--1;
+}

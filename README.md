@@ -1,58 +1,24 @@
-## www
+# www
 
-`www` is the public-facing Hugo site repo in the current multi-repo stack.
+Fresh single-site Hugo scaffold created on 2026-03-16 to replace the older multi-repo stack.
 
-### Module identity
+## Intent
+- one repo
+- one site
+- one domain
+- good-enough handoff base for follow-on work
 
-- Module path: `github.com/dan-hill/www`
+## Source of scaffold
+- site scaffold copied from the archived OX example site
+- OX theme vendored locally at `themes/ox`
 
-### Dependency chain
+## Archived previous stack
+- `/home/dan/src/archive/site-stack-20260317-031259/docs`
+- `/home/dan/src/archive/site-stack-20260317-031259/ox`
+- `/home/dan/src/archive/site-stack-20260317-031259/site-base`
+- `/home/dan/src/archive/site-stack-20260317-031259/www`
 
-`www` imports `github.com/dan-hill/site-base`, and `site-base` imports `github.com/dan-hill/ox`.
-
-That means the visual stack for `www` is:
-
-- `www` → `site-base` → `ox`
-
-### Content sources
-
-- author Org sources in `content-org/`
-- commit exported Markdown in `content/`
-
-### GitHub Pages workflow note
-
-The workflow at `.github/workflows/deploy-pages.yml` already sets up Go and Hugo and builds from the site root.
-
-For that workflow to succeed after the new OX integration, OpenClaw must first ensure:
-
-1. `github.com/dan-hill/ox` is pushed and tagged
-2. `github.com/dan-hill/site-base` is updated to that OX tag and pushed/tagged
-3. `www` is updated to the intended `site-base` tag with:
-   - `hugo mod get github.com/dan-hill/site-base@<tag>`
-4. the resulting `go.mod` and `go.sum` updates are committed before Pages deploy runs
-
-Because OX ships precompiled runtime CSS, the current Pages workflow does not need Hugo extended just to render the shared theme.
-
-### Shared presentation source of truth
-
-`www` is no longer the canonical source of the `ASPHALT//INDEX` presentation layer.
-
-The shared implementation now lives in:
-
-- `github.com/dan-hill/ox`
-
-See `~/src/ox/README.md` for the shared theme behavior, params, defaults, project model, and Unifont handling.
-
-### Consumer-local responsibilities
-
-`www` keeps only site-specific concerns:
-
-- home/project content in `content/`
-- menu/config choices in `hugo.toml`
-- the `/projects/` content scaffold at `content/projects/_index.md`
-
-Project entries authored for `www` should use the shared canonical field:
-
-- `project_kind`
-
-The legacy alias `kind` remains supported by the shared theme for backward compatibility.
+## Notes
+- This is intentionally only a clean starting point.
+- Generated build output was removed.
+- Git history from the previous repos was preserved in the archive copies, not carried into this new scaffold.

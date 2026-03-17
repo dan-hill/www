@@ -1,13 +1,10 @@
 +++
-title = "Node"
-draft = false
+title = 'Home'
+description = 'Demo landing page for the OX Hugo theme.'
 +++
 
-This node is meant to feel less like a brochure and more like a live signal board.
+{{< callout title="Reference-only upstream posture" >}}
+OX does not copy upstream CSS or bundled artwork verbatim. The theme recreates the approved visual relationships using original Hugo templates and styles.
+{{< /callout >}}
 
-Current lanes:
-
-- **PROJECT INDEX** — shipped work, live experiments, archived fragments.
-- **DISPATCHES** — short posts, build traces, and notes from the bench.
-- **DOCS** — manuals, procedures, and maintenance maps.
-- **ABOUT** — what the node is for and how it is wired.
+{{< glow-button href="/docs/getting-started/" label="Read the docs-lite walkthrough" />}}

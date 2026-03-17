@@ -1,59 +1,50 @@
-title = "danhill.us"
-baseURL = "http://localhost:1313/"
-disableKinds = ["taxonomy", "term"]
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'OX Example Site'
+theme = 'ox'
+enableRobotsTXT = true
+summaryLength = 24
 
-[module]
-workspace = "off"
+[pagination]
+pagerSize = 6
 
-[[module.imports]]
-path = "github.com/dan-hill/site-base"
+[taxonomies]
+tag = 'tags'
+category = 'categories'
+
+[markup]
+  [markup.highlight]
+  noClasses = false
+  lineNos = true
+  [markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
+  ordered = false
 
 [params]
-description = "Landing node for work, dispatches, and docs."
+description = 'High-neon mono Hugo theme demo for blog and docs-lite content.'
 
-[params.ox]
-mode = "landing"
-tagline = "PUBLIC BBS / DISPATCH BOARD / PROJECT SWITCH"
-footer_line = "PUBLISHED WITH HUGO // ORG -> OX-HUGO // NODE -> DANHILL.US"
-masthead_ascii = [
-  '    ___   _____ ____  __  __    _    __    ____  __',
-  '   / _ | / ___// __ \/ / / /   / |  / /   /  _/ |/ /',
-  '  / __ |/ /__ / /_/ / /_/ /   /  |_/ /   _/ //    / ',
-  ' /_/ |_|\___/ \____/\____/   /_/|___/   /___/_/|_/  ',
-  ' [ PUBLIC BBS // PROJECT SWITCH // SIGNAL BOARD ]',
-]
-masthead_ascii_compact = ["[ DANHILL.US :: SIGNAL BOARD ]"]
-landing_routes = [
-  { label = "PROJECT INDEX", url = "/projects/", note = "Shipped, building, lab, and archive work in dense operator rows." },
-  { label = "DISPATCHES", url = "/posts/", note = "Short field notes, release traces, and station logs." },
-  { label = "DOCS", url = "https://docs.danhill.us/", note = "Manuals, maps, and maintenance references." },
-  { label = "ABOUT", url = "/about/", note = "What this node is trying to be and how it is wired." },
-]
+  [params.ox]
+    [params.ox.hero]
+    eyebrow = 'Signal lock acquired'
+    title = 'OX // Cyberpunk-neon Hugo'
+    description = 'Original Hugo-native theme architecture with mono typography, layered panels, sharp borders, and zero-JS core navigation.'
+    primary_label = 'Browse dispatches'
+    primary_url = '/posts/'
+    secondary_label = 'Open docs'
+    secondary_url = '/docs/'
 
 [[menu.main]]
-name = "Projects"
-url = "/projects/"
-weight = 5
-  [menu.main.params]
-  note = "Dense project index with status, links, and notes."
-
-[[menu.main]]
-name = "About"
-url = "/about/"
+name = 'Posts'
+pageRef = '/posts'
 weight = 10
-  [menu.main.params]
-  note = "What this node is and what it points to."
 
 [[menu.main]]
-name = "Dispatches"
-url = "/posts/"
+name = 'Docs'
+pageRef = '/docs'
 weight = 20
-  [menu.main.params]
-  note = "Short posts, updates, and project traces."
 
 [[menu.main]]
-name = "Docs"
-url = "https://docs.danhill.us/"
+name = 'Tags'
+pageRef = '/tags'
 weight = 30
-  [menu.main.params]
-  note = "Living project documentation and working notes."

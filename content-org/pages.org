@@ -1,8 +1,0 @@
-#+hugo_base_dir: ../
-
-* About
-:PROPERTIES:
-:EXPORT_FILE_NAME: about
-:EXPORT_HUGO_SECTION: /
-:END:
-This is the sample regular page for the www site.

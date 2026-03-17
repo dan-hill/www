@@ -1,0 +1,29 @@
+.ox-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--ox-border-subtle);
+  background: rgba(17, 17, 17, 0.985);
+}
+
+.ox-header__inner {
+  display: grid;
+  gap: $space-sm;
+  padding: $space-sm 0;
+}
+
+.ox-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: $space-xs;
+  color: #f3f3f3;
+  font-size: $font-size-0;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.ox-brand__slash {
+  color: var(--ox-accent-primary);
+}

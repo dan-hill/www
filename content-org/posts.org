@@ -1,8 +1,0 @@
-#+hugo_base_dir: ../
-#+hugo_section: posts
-
-* Welcome Post
-:PROPERTIES:
-:EXPORT_FILE_NAME: welcome-post
-:END:
-This is the sample post for the www site.
