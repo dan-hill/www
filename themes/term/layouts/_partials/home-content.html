@@ -1,40 +1,14 @@
-{{ $pages := where site.RegularPages "Section" "posts" }}
 {{ $docs := where site.RegularPages "Section" "docs" }}
-<section class="term-block">
-  <pre class="term-label">== ROUTES ==</pre>
-  <ul class="term-list">
-    <li><span class="term-index">01.</span><a href="{{ "/posts/" | relURL }}">posts</a><span class="term-dots"></span><span class="term-date">journal / dispatches</span></li>
-    <li><span class="term-index">02.</span><a href="{{ "/docs/" | relURL }}">docs</a><span class="term-dots"></span><span class="term-date">reference / notes</span></li>
-    {{ with .OutputFormats.Get "rss" }}<li><span class="term-index">03.</span><a href="{{ .RelPermalink }}">rss</a><span class="term-dots"></span><span class="term-date">machine feed</span></li>{{ end }}
-  </ul>
-</section>
-
-<section class="term-block">
-  <pre class="term-label">== RECENT POSTS ==</pre>
-  {{ if gt (len $pages) 0 }}
-  <ul class="term-list">
-    {{ range $i, $p := first 8 ($pages.ByDate.Reverse) }}
-    <li>
-      <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
-      <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
-      <span class="term-dots"></span>
-      <span class="term-date">{{ $p.Date.Format "2006-01-02" }}</span>
-    </li>
-    {{ end }}
-  </ul>
-  {{ else }}
-  <p class="term-empty">No posts found.</p>
-  {{ end }}
-</section>
-
 <section class="term-block">
   <pre class="term-label">== DOCS ==</pre>
   {{ if gt (len $docs) 0 }}
   <ul class="term-list">
-    {{ range $i, $p := first 8 ($docs.ByTitle) }}
+    {{ range $i, $p := first 8 ($docs.ByLastmod.Reverse) }}
     <li>
       <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
       <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ ($p.Lastmod | default $p.Date).Format "2006-01-02" }}</span>
     </li>
     {{ end }}
   </ul>

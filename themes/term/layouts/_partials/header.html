@@ -1,3 +1,3 @@
 <header class="term-block term-header">
-<pre class="term-ascii">SITE://DANHILL.US  MODE://TEXT  FEED://ONLINE</pre>
+<pre class="term-ascii">SITE://DANHILL.US  MODE://TEXT  {{ with .OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">FEED://ONLINE</a>{{ else }}FEED://OFFLINE{{ end }}</pre>
 </header>
