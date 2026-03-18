@@ -2,78 +2,255 @@
 #+filetags: :docs:org:system:
 
 * Overview
-This document describes the public-facing shape of Dan's Org-based operating system.
-It is the first experiment in publishing Org-native documentation from a curated external
-layer rather than exposing the full internal planning tree directly.
+The Org System is the canonical text-native operating layer for planning, execution,
+inventory, operational notes, and assistant context. It is designed to be readable and
+editable by humans while remaining structured enough to support automation, search,
+derivation, and publishing.
 
-* What It Is
-Dan's Org system is a local-first text operating system for:
-- project planning
+This document describes how the system works, how information is organized, how records
+should be routed, and how the internal operational layer relates to the published layer.
+
+* Purpose
+The system exists to provide a durable source of truth for ongoing work without relying on
+opaque tools, siloed applications, or chat history as the primary record.
+
+Its goals are to:
+- preserve operational truth in plain text
+- support project execution and review
+- keep inventory and requirements linked to real work
+- maintain assistant continuity without turning memory into the primary database
+- allow derived views, including public documentation, to be generated from a canonical base
+
+* Scope
+The Org System covers:
+- project records
 - task tracking
-- inventory and requirements
-- operational notes
-- assistant orientation and continuity
+- requirements and material needs
+- inventory and location data
+- operational journal/history
+- decisions and rationale
+- review queues and ambiguous captures
+- assistant orientation and continuity references
 
-The system is designed to stay readable by humans first, while still being structured
-enough for tooling and lightweight automation.
+It is not intended to replace every possible tool. Its role is to be the canonical,
+local-first operational layer around which other views and workflows can be built.
 
-* Canonical Model
-- Internal Org tree = operational source of truth
-- Published Org tree = curated external/public view
-- Memory files = assistant recall layer
-- Hugo site = rendered presentation layer
+* Canonical Sources of Truth
+The system uses layered sources of truth.
 
-* Current Publishing Workflow
-Right now, publishing is intentionally simple.
+** Canonical operational layer
+- `org/` = durable operational truth
 
-- Internal source documents live in the main Org project tree.
-- Public-facing documents live in `org/publish/`.
-- Hugo reads the curated public Org files, not the internal project records directly.
-- This allows the public model to evolve without forcing premature structure onto the internal one.
+** Assistant recall layer
+- `MEMORY.md` = distilled long-term recall
+- `memory/YYYY-MM-DD.md` = daily continuity log
 
-This file is the first test of that workflow.
+** Orientation layer
+- `org/ops/assistant-digest.org` = current orientation snapshot for the assistant
 
-* Internal vs External
-** Internal Org
-Internal Org files may contain:
-- planning details
-- triage notes
-- assistant-oriented routing
-- incomplete or operationally messy structure
+The key rule is:
+- Org holds the structured operational truth
+- memory holds distilled recall
+- published content is derived from canonical sources rather than replacing them
 
-** External Org
-Published Org should be:
+* Canonical Location
+The canonical Org tree is maintained in a Windows-backed location so it remains accessible
+from both native Windows tools and Linux/WSL environments.
+
+- Windows canonical root: `C:\Users\mail\org`
+- WSL path: `/mnt/c/Users/mail/org`
+- Workspace `org/` path: symlink into that canonical tree
+
+This arrangement allows the same files to be edited from multiple environments while still
+preserving a single canonical text tree.
+
+* Top-Level Directory Structure
+** `projects/`
+Holds project records and project-adjacent ledgers.
+
+- `projects.org` = project index / map
+- `tasks.org` = canonical task ledger for explicitly captured work
+- `requirements.org` = structured material and requirement records
+- `files/*.org` = per-project documents
+
+** `inventory/`
+Holds shared material and storage information.
+
+- `assets.org` = canonical asset inventory
+- `shopping.org` = aggregated buy list
+- `locations.org` = location map
+- `review-queue.org` = inventory cleanup and triage
+
+** `ops/`
+Holds operational and system-level records.
+
+- `assistant-digest.org` = orientation snapshot
+- `journal.org` = work log and historical provenance
+- `decisions.org` = durable decisions and rationale
+- `review-queue.org` = generic inbox / ambiguous captures
+- `maintenance-cadence.org` = upkeep rhythm
+- `system.org` = broader system and environment documentation
+
+** `publish/`
+Holds curated Org documents intended for publication or external presentation.
+
+This layer is intentionally separate from the internal operational tree. It exists to make
+public/exported content possible without forcing the canonical internal documents to double
+as polished publication artifacts.
+
+* Document Roles
+Each major document class has a distinct job.
+
+** Project files
+Project files describe a project as a living record: scope, current state, notes,
+relationships, and project-local context.
+
+** Task ledger
+The task ledger is the canonical record for explicitly captured executable work.
+It is not a dumping ground for every idea or observation.
+
+** Requirements ledger
+The requirements ledger links projects to material needs in structured form.
+It exists to keep project needs relational and queryable without requiring a database.
+
+** Inventory files
+Inventory files define assets, locations, and procurement-oriented views. They are shared
+resources across projects rather than project-local duplicates.
+
+** Journal
+The journal captures what happened, what changed, and what was learned.
+Its purpose is provenance, not polished presentation.
+
+** Decisions
+The decisions log captures durable choices and their reasoning so that later work does not
+have to reconstruct intent from fragments.
+
+** Review queues
+Review queues exist to hold ambiguous, incomplete, or not-yet-routed items without forcing
+premature structure.
+
+** Digest
+The digest is not the canonical database. It is the orientation layer for the assistant and
+should summarize the current operational reality without replacing the underlying records.
+
+* Information Routing Rules
+The system depends on sending information to the narrowest correct destination.
+
+- Concrete executable work -> `projects/tasks.org`
+- Ambiguous or incubating items -> `ops/review-queue.org`
+- Inventory-only cleanup -> `inventory/review-queue.org`
+- Work log / discoveries / progress -> `ops/journal.org`
+- Durable decisions -> `ops/decisions.org`
+- Stable operating context -> `MEMORY.md`
+- Same-day continuity -> `memory/YYYY-MM-DD.md`
+- Orientation / summary updates -> `ops/assistant-digest.org`
+
+The routing rule is simple: avoid turning every note into a task, avoid turning every chat
+into memory, and avoid letting internal state drift into unstructured conversation.
+
+* Data and Entity Conventions
+The system uses lightweight structure rather than heavy schema enforcement.
+
+** Entity identity
+Major entities should have stable `:ID:` properties.
+
+** Tasks
+New tasks should normally include:
+- `:ID:`
+- `:PROJECT_ID:`
+
+** Projects
+Projects typically include:
+- stable title
+- `:ID:`
+- status
+- supporting notes or sections as needed
+
+** Linking
+Cross-record relationships should prefer:
+- `id:` links for durable references
+- `file:` links for navigation between documents
+
+** General rule
+Structure metadata enough to preserve meaning and relationships, but do not fabricate detail
+purely to satisfy a schema.
+
+* Internal vs Published Content
+The Org System intentionally distinguishes between internal operational content and curated
+published content.
+
+** Internal content
+Internal content may include:
+- planning detail
+- unfinished structure
+- triage artifacts
+- assistant-oriented context
+- incomplete or operationally messy information
+
+** Published content
+Published content should be:
 - curated
 - readable
 - intentionally public-facing
-- stable enough to render as site content
+- stable enough to render well as documentation
 
-The goal is not perfect synchronization yet.
-The goal is to learn what the transformation boundary should be.
+This separation allows the internal system to remain useful for real work without forcing it
+to conform prematurely to public-documentation standards.
 
-* Top-Level Org Structure
-** `projects/`
-Project records, task ledger, requirements, and per-project files.
+* Publishing Workflow
+The current publishing model is intentionally conservative.
 
-** `inventory/`
-Assets, locations, shopping, and inventory review work.
+- Internal project and ops records remain canonical.
+- Curated public-facing Org documents are authored under `org/publish/`.
+- Hugo consumes the curated published documents rather than reading internal project files directly.
+- Site content is copied into the Hugo repository for deployment-safe publishing.
 
-** `ops/`
-Journal, decisions, assistant digest, system notes, and review queue.
+This creates a controlled boundary between:
+- internal operational truth
+- curated external documentation
+- rendered public presentation
+
+The current model is deliberately simple so the publishing workflow can be tested before a
+broader transformation model is defined.
+
+* Maintenance Model
+The system is maintained through small, frequent, low-chaos updates rather than periodic
+large reorganizations.
+
+Maintenance expectations include:
+- log meaningful structural changes in the journal
+- refresh the assistant digest when orientation changes
+- promote ambiguous items through review queues instead of scattering them
+- keep task and requirement ledgers aligned with real work
+- update memory only when something is durable enough to matter later
+
+The design goal is coherence over perfection.
 
 * Design Principles
-- local-first
-- plain text
-- small reversible edits
-- human legibility over over-engineering
-- canonical truth in Org, with other views derived from it
+The system is guided by a few consistent principles.
 
-* Why This Exists
-This published Org document exists to test a future workflow where:
-- internal Org stays flexible and operational
-- external Org becomes a curated publishing surface
-- Hugo can render Org-native docs without making the site the source of truth
+- local-first over cloud-dependent
+- plain text over opaque storage
+- canonical truth before derived views
+- small reversible edits over large restructures
+- human legibility over machine theatrics
+- selective structure over compulsive over-modeling
+- publication as a derived layer, not the source of truth
+
+* Future Evolution
+The current published Org workflow is intentionally minimal. It is expected to evolve.
+
+Likely future directions include:
+- a clearer mutation model from internal Org to external Org
+- more explicit publishing conventions for curated documents
+- richer derivation of site content from canonical sources
+- tighter relationship between project records and public documentation
+- more deliberate handling of private vs publishable sections
+
+The system is not trying to solve every future problem immediately.
+It is trying to create a stable foundation that can evolve without rewriting the entire model.
 
 * Notes
-This page is intentionally lightweight.
-It is a workflow probe as much as documentation.
+This document is intended to be authoritative documentation for the Org System as an
+operational architecture. It should read as system documentation, not as a personal note or
+project blurb.
