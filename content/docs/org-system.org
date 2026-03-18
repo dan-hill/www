@@ -1,1 +1,79 @@
-/home/node/.openclaw/workspace/org/publish/org-system.org
+#+title: Org System
+#+filetags: :docs:org:system:
+
+* Overview
+This document describes the public-facing shape of Dan's Org-based operating system.
+It is the first experiment in publishing Org-native documentation from a curated external
+layer rather than exposing the full internal planning tree directly.
+
+* What It Is
+Dan's Org system is a local-first text operating system for:
+- project planning
+- task tracking
+- inventory and requirements
+- operational notes
+- assistant orientation and continuity
+
+The system is designed to stay readable by humans first, while still being structured
+enough for tooling and lightweight automation.
+
+* Canonical Model
+- Internal Org tree = operational source of truth
+- Published Org tree = curated external/public view
+- Memory files = assistant recall layer
+- Hugo site = rendered presentation layer
+
+* Current Publishing Workflow
+Right now, publishing is intentionally simple.
+
+- Internal source documents live in the main Org project tree.
+- Public-facing documents live in `org/publish/`.
+- Hugo reads the curated public Org files, not the internal project records directly.
+- This allows the public model to evolve without forcing premature structure onto the internal one.
+
+This file is the first test of that workflow.
+
+* Internal vs External
+** Internal Org
+Internal Org files may contain:
+- planning details
+- triage notes
+- assistant-oriented routing
+- incomplete or operationally messy structure
+
+** External Org
+Published Org should be:
+- curated
+- readable
+- intentionally public-facing
+- stable enough to render as site content
+
+The goal is not perfect synchronization yet.
+The goal is to learn what the transformation boundary should be.
+
+* Top-Level Org Structure
+** `projects/`
+Project records, task ledger, requirements, and per-project files.
+
+** `inventory/`
+Assets, locations, shopping, and inventory review work.
+
+** `ops/`
+Journal, decisions, assistant digest, system notes, and review queue.
+
+* Design Principles
+- local-first
+- plain text
+- small reversible edits
+- human legibility over over-engineering
+- canonical truth in Org, with other views derived from it
+
+* Why This Exists
+This published Org document exists to test a future workflow where:
+- internal Org stays flexible and operational
+- external Org becomes a curated publishing surface
+- Hugo can render Org-native docs without making the site the source of truth
+
+* Notes
+This page is intentionally lightweight.
+It is a workflow probe as much as documentation.
