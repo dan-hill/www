@@ -1,0 +1,45 @@
+#+title: HTPC
+#+date: 2026-03-17
+#+filetags: :docs:project:hardware:
+
+* Overview
+The HTPC project is a planned home theater and network media system built around a modern desktop
+platform. The intent is to create a capable machine that can serve as a living-room system,
+media endpoint, and general-purpose local streaming/download box.
+
+* Purpose
+The project exists to deliver a system that can:
+- function as a high-performance HTPC
+- support local and network streaming workloads
+- act as a capable media/download machine
+- remain maintainable as a discrete hardware build rather than an ad hoc pile of parts
+
+* Planned Work Phases
+** Procurement
+- order parts
+
+** Assembly
+- assemble the system
+- verify thermals, fitment, and baseline boot behavior
+
+** Configuration
+- set up network streaming
+- set up torrent auto-download workflows
+
+* Planned Hardware
+- AMD Ryzen 7 7700X
+- GIGABYTE B850 AORUS Elite WIFI7
+- KLEVV BOLT V DDR5 32 GB (2×16) 6400 MHz CL30
+- KLEVV CRAS C910 1 TB NVMe (Gen4 x4)
+- MSI GeForce RTX 5070 12G Shadow 3X OC
+- MSI MAG A650BE — 650 W 80+ Bronze (Semi-modular)
+- SilverStone Grandia 11 (GD11B) — compact ATX HTPC case
+- Thermalright Aqua Elite 240 ARGB V4 AIO
+
+* Status
+The project is active and currently represented as a planned build with a defined component list
+and a straightforward execution sequence: buy parts, assemble, then configure for media workflows.
+
+* Notes
+This published view is intentionally simpler than the internal project record. It captures the
+shape of the build without exposing every internal planning detail or source-specific metadata.

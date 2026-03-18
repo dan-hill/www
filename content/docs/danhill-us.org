@@ -1,0 +1,50 @@
+#+title: danhill.us
+#+date: 2026-03-17
+#+filetags: :docs:project:site:
+
+* Overview
+`danhill.us` is the public-facing site used as a lightweight publishing surface for selected
+technical notes, system documentation, and project-adjacent writing.
+
+The site is intentionally text-forward, static, and low-friction. It is designed to support
+simple publishing workflows without turning the site itself into the canonical planning system.
+
+* Purpose
+The site exists to:
+- publish selected documentation and notes
+- provide a stable public reference surface
+- experiment with text-native publishing workflows
+- serve as a rendered presentation layer for curated content derived from canonical sources
+
+* Current Architecture
+The site currently uses:
+- Hugo as the static site generator
+- GitHub Pages for deployment
+- a custom text-oriented `term` theme
+- Org-native publishing experiments for curated documentation pages
+
+The content model is intentionally small and still evolving.
+
+* Publishing Model
+The current publishing model separates:
+- internal operational content
+- curated public-facing documents
+- rendered site output
+
+Internal project and operational records remain canonical in the Org system.
+Public-facing content is authored or adapted into the `org/publish/` layer, then copied into
+the Hugo repository as site content for deployment-safe publication.
+
+This keeps the public site from becoming the source of truth while still allowing it to reflect
+real project and system documentation.
+
+* Current Priorities
+- refine the text-native site design
+- test Org-native publishing workflows
+- expand the set of worthwhile project/system docs available on the site
+- keep deployment simple and legible
+
+* Notes
+This project is both a real site and an active publishing workflow experiment.
+Its importance is not only the rendered website, but also the boundary it helps define between
+internal operational documents and public documentation.
