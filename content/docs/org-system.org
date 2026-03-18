@@ -1,0 +1,1 @@
+/home/node/.openclaw/workspace/org/publish/org-system.org
