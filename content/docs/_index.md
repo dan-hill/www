@@ -1,8 +1,7 @@
 +++
 title = 'Docs'
-description = 'Docs-lite content tree for onboarding and reference pages.'
+description = 'Curated Org-native documentation and project notes.'
 +++
 
-{{< panel title="Docs-lite pattern" >}}
-Use the docs section for onboarding, reference, and compact knowledge-base content. The same design tokens apply, but the information architecture stays straightforward.
-{{< /panel >}}
+The docs section is a curated publishing surface for Org-native system documentation and selected
+project pages. It is intentionally smaller and cleaner than the internal operational tree.

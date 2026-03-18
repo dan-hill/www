@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="term-block">
+  <pre class="term-label">== {{ .Title | upper }} ==</pre>
+  <p class="term-meta">PATH {{ .RelPermalink }} | KIND {{ .Kind | upper }} | COUNT {{ len .Pages }}</p>
+  {{ with .Content }}
+  <div class="term-prose">{{ . }}</div>
+  {{ end }}
+</section>
+
+<section class="term-block">
+  <pre class="term-label">== ENTRIES ==</pre>
+  {{ $pages := where .Pages "Kind" "page" }}
+  <ul class="term-list">
+    {{ range where $pages "Title" "Org System" }}
+    <li>
+      <span class="term-index">01.</span>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ (.Lastmod | default .Date).Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+    {{ range where $pages "Title" "danhill.us" }}
+    <li>
+      <span class="term-index">02.</span>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ (.Lastmod | default .Date).Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+    {{ range where $pages "Title" "HTPC" }}
+    <li>
+      <span class="term-index">03.</span>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ (.Lastmod | default .Date).Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+    {{ $rest := where $pages "Title" "not in" (slice "Org System" "danhill.us" "HTPC") }}
+    {{ range $i, $p := $rest.ByTitle }}
+    <li>
+      <span class="term-index">{{ printf "%02d" (add $i 4) }}.</span>
+      <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ ($p.Lastmod | default $p.Date).Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
