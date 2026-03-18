@@ -1,4 +1,18 @@
+{{ $docs := where site.RegularPages "Section" "docs" }}
 <section class="term-block">
   <pre class="term-label">== DOCS ==</pre>
-  <p class="term-empty">Docs index available via <a href="{{ "/docs/" | relURL }}">/docs/</a>.</p>
+  {{ if gt (len $docs) 0 }}
+  <ul class="term-list">
+    {{ range $i, $p := first 8 ($docs.ByLastmod.Reverse) }}
+    <li>
+      <span class="term-index">{{ printf "%02d" (add $i 1) }}.</span>
+      <a href="{{ $p.RelPermalink }}">{{ $p.LinkTitle }}</a>
+      <span class="term-dots"></span>
+      <span class="term-date">{{ ($p.Lastmod | default $p.Date).Format "2006-01-02" }}</span>
+    </li>
+    {{ end }}
+  </ul>
+  {{ else }}
+  <p class="term-empty">No docs found.</p>
+  {{ end }}
 </section>
