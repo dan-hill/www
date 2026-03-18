@@ -1,45 +1,108 @@
 #+title: HTPC
-#+date: 2026-03-17
-#+filetags: :docs:project:hardware:
+#+date: 2026-03-18
+#+filetags: :docs:project:hardware:media:
 
 * Overview
-The HTPC project is a planned home theater and network media system built around a modern desktop
-platform. The intent is to create a capable machine that can serve as a living-room system,
-media endpoint, and general-purpose local streaming/download box.
+The HTPC project delivered a compact but capable living-room media machine built around a
+modern desktop platform instead of a fragile pile of repurposed parts. The goal was to end up
+with a system that looked intentional, handled local playback and network media duties cleanly,
+and remained easy to maintain as a real machine rather than a one-off experiment.
 
-* Purpose
-The project exists to deliver a system that can:
-- function as a high-performance HTPC
-- support local and network streaming workloads
-- act as a capable media/download machine
-- remain maintainable as a discrete hardware build rather than an ad hoc pile of parts
+The finished build combines desktop-class CPU and GPU performance with an HTPC-friendly case,
+quiet cooling, fast local storage, and enough flexibility to serve as both a media endpoint and
+an always-available home streaming/download box.
 
-* Planned Work Phases
-** Procurement
-- order parts
+* Project Outcome
+The project was completed as a full hardware build and setup effort.
 
-** Assembly
-- assemble the system
-- verify thermals, fitment, and baseline boot behavior
+It resulted in a finished HTPC that:
+- serves as a dedicated home theater/media system
+- supports local and network streaming workloads
+- provides a stable platform for download and media-management workflows
+- consolidates those functions into a single maintainable machine
 
-** Configuration
-- set up network streaming
-- set up torrent auto-download workflows
+The final value of the project was not just the assembled hardware, but the shift from an
+ad hoc media setup to a deliberate, documented system with a clear purpose and component model.
 
-* Planned Hardware
+* Goals
+The build was intended to satisfy a few practical requirements at the same time:
+- fit cleanly into a home theater environment
+- avoid underpowered small-box compromises
+- stay straightforward to service and upgrade
+- provide enough performance headroom for modern media and general-purpose desktop tasks
+- support downstream software configuration for streaming and automated media workflows
+
+In practice, that meant prioritizing a balanced build: strong enough to be pleasant, compact
+enough to belong in an entertainment setup, and standard enough that replacement parts and future
+changes would not be painful.
+
+* Hardware Platform
+The completed system was built around the following component set:
 - AMD Ryzen 7 7700X
 - GIGABYTE B850 AORUS Elite WIFI7
-- KLEVV BOLT V DDR5 32 GB (2×16) 6400 MHz CL30
+- KLEVV BOLT V DDR5 32 GB (2x16) 6400 MHz CL30
 - KLEVV CRAS C910 1 TB NVMe (Gen4 x4)
 - MSI GeForce RTX 5070 12G Shadow 3X OC
-- MSI MAG A650BE — 650 W 80+ Bronze (Semi-modular)
-- SilverStone Grandia 11 (GD11B) — compact ATX HTPC case
+- MSI MAG A650BE 650 W 80+ Bronze (semi-modular)
+- SilverStone Grandia 11 (GD11B) compact ATX HTPC case
 - Thermalright Aqua Elite 240 ARGB V4 AIO
 
-* Status
-The project is active and currently represented as a planned build with a defined component list
-and a straightforward execution sequence: buy parts, assemble, then configure for media workflows.
+This hardware mix reflects the actual character of the project: a real desktop-class system in an
+HTPC-oriented enclosure, not an ultra-low-power thin client or disposable appliance.
+
+* Build Decisions
+A few design choices defined the project.
+
+** Desktop-class performance in an HTPC form factor
+Rather than optimize only for minimum size or minimum power draw, the project favored a more
+capable platform that could comfortably handle media duties while still feeling like a serious
+computer. That choice improved longevity and kept the machine useful beyond a single narrow role.
+
+** Standard components over exotic solutions
+The build stayed close to mainstream desktop parts. That kept the machine easier to troubleshoot,
+upgrade, and document, and reduced the risk of ending up with a clever but annoying system.
+
+** Quiet, serviceable packaging
+The Grandia 11 case and 240 mm AIO combination supported the goal of building something that could
+live in a home theater environment without feeling like a temporary bench build. Even more than raw
+performance, the success criterion was whether the machine felt intentional in day-to-day use.
+
+* Build and Configuration Work
+The project broke down into three broad phases.
+
+** Procurement
+Parts were selected as a coherent platform rather than accumulated opportunistically. The component
+set balanced CPU/GPU capability, thermal fitment, storage speed, case constraints, and overall
+practicality for the intended role.
+
+** Assembly
+The physical build brought the chosen platform into the HTPC enclosure, with attention paid to
+fitment, cooling, cabling, and the realities of packing desktop hardware into a more constrained
+case layout.
+
+** System setup
+Once assembled, the machine was configured for its actual job: network media access, streaming,
+and download-adjacent workflows. That final phase is what turned the hardware from a completed PC
+build into a finished HTPC system.
+
+* Resulting System Role
+The completed machine occupies a useful middle ground:
+- more capable than a simple streaming box
+- more purpose-built than a generic spare desktop
+- easier to maintain than a scattered set of media tools spread across multiple devices
+
+That made it a good fit for a home setup where media consumption, local services, and occasional
+broader desktop-class tasks all benefit from living on one reliable platform.
+
+* Why This Project Matters
+The HTPC project is a good example of preferring a coherent system over a convenience hack.
+Instead of accepting a fragile stack of partial solutions, the project established a single,
+well-defined machine with clear hardware, clear purpose, and a documented shape.
+
+That is ultimately what makes it worth documenting: it is not just a list of parts, but a
+finished piece of household infrastructure.
 
 * Notes
-This published view is intentionally simpler than the internal project record. It captures the
-shape of the build without exposing every internal planning detail or source-specific metadata.
+This document is the public-facing project summary for the HTPC build. It is intentionally written
+as completed documentation rather than a planning artifact, and is meant to represent the project
+as a finished system rather than an in-progress checklist.
