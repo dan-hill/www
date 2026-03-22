@@ -1,6 +1,4 @@
 +++
-title = 'Dispatches'
-description = 'News, notes, and release-log style posts rendered in a neon card grid.'
+title = 'Posts'
+description = 'Notes, write-ups, and whatever else lands here.'
 +++
-
-Dispatches are the blog-facing side of OX. Expect sharp borders, bright hover states, and readable long-form content.

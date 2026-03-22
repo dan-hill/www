@@ -1,5 +1,0 @@
-{{ $url := .RelPermalink }}
-{{ with .Params.external_url }}
-  {{ $url = . }}
-{{ end }}
-{{ return $url }}

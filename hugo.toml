@@ -1,6 +1,6 @@
 baseURL = 'https://danhill.us/'
 languageCode = 'en-us'
-title = 'TERM Example Site'
+title = 'danhill.us'
 theme = 'term'
 enableRobotsTXT = true
 summaryLength = 24
@@ -22,17 +22,7 @@ category = 'categories'
   ordered = false
 
 [params]
-description = 'Text-only terminal Hugo theme with 80-column centered layout and Unifont.'
-
-  [params.ox]
-    [params.ox.hero]
-    eyebrow = 'Signal lock acquired'
-    title = 'OX // Cyberpunk-neon Hugo'
-    description = 'Original Hugo-native theme architecture with mono typography, layered panels, sharp borders, and zero-JS core navigation.'
-    primary_label = 'Browse dispatches'
-    primary_url = '/posts/'
-    secondary_label = 'Open docs'
-    secondary_url = '/docs/'
+description = 'Dan Hill on software, systems, and whatever else seems useful.'
 
 [[menu.main]]
 name = 'Posts'

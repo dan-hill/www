@@ -1,22 +1,22 @@
 +++
 title = 'First Contact'
 date = 2026-03-13T12:00:00Z
-description = 'Launching the first high-neon dispatch.'
-summary = 'OX ships with a blog-forward card grid and code blocks that feel native to the palette.'
+description = 'First post on the new site.'
+summary = 'Standing up the site with a text-forward theme and a few docs to start.'
 featured = true
-tags = ['launch', 'neon']
+tags = ['launch', 'site']
 categories = ['updates']
 +++
 
-## Why OX exists
+## Why this site exists
 
-The theme is built for people who want a loud aesthetic without giving up structure, semantics, or basic accessibility.
+A place to publish technical notes, project docs, and the occasional write-up without overthinking it.
 
-### Interaction model
+### How it works
 
-Navigation, taxonomy pages, and docs pages work without JavaScript. Hover and focus states shift from cyan to magenta, while borders stay sharp.
+Static site, no JavaScript, text-forward layout. Navigation, taxonomy pages, and docs all work without client-side code.
 
-## Code feels first-class
+## Code example
 
 ```go
 package main
@@ -24,6 +24,6 @@ package main
 import "fmt"
 
 func main() {
-    fmt.Println("OX: signal lock acquired")
+    fmt.Println("hello, world")
 }
 ```

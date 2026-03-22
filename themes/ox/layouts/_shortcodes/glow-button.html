@@ -1,3 +1,0 @@
-{{ $href := .Get "href" | default "/" }}
-{{ $label := .Get "label" | default (.Inner | plainify) }}
-<a class="ox-button" href="{{ $href | relURL }}">{{ $label }}</a>
