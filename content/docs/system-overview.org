@@ -1,0 +1,110 @@
+#+title: System Overview
+#+date: 2026-03-23
+#+filetags: :publish:docs:system:
+
+* Overview
+This system is a local-first operating environment built around OpenClaw, Org, a structured workspace,
+and a curated publishing layer.
+
+The goal is not to make everything look neat on paper. The goal is to keep work, notes, files,
+automation, and publication coherent enough that they can evolve without constantly dissolving into drift.
+
+* Core Layers
+** OpenClaw
+OpenClaw is the assistant and automation runtime.
+
+It provides:
+- the main conversational assistant
+- dedicated helper agents such as heartbeat, ops, and maintenance
+- scheduled jobs and background automation
+- node access into the surrounding environment
+
+OpenClaw is the execution and orchestration layer, not the canonical store of long-term truth.
+
+** Org
+The Org layer is the internal control plane.
+
+It holds:
+- system rules and operating model
+- project records
+- decisions and status
+- infrastructure notes
+- maintenance and publishing policy
+
+Org is where the meaning of the system lives.
+
+** Workspace file system
+The broader workspace holds the actual payload.
+
+A simplified model:
+- `org/` = control plane
+- `projects/`, `docs/`, `media/`, `data/`, `ops/`, `bin/` = payload roots
+- `scratch/`, `archive/` = lifecycle roots
+
+This split keeps authoritative records separate from the files, binaries, media, and data they describe.
+
+* Project Model
+Projects use one canonical file per project.
+
+Each project file is structured for both human readability and operational clarity, with sections for:
+- Overview
+- Tasks
+- Spec
+- Notes
+- Decisions
+- References
+
+The project file is the canonical home of the project rather than one more fragment in a pile of ledgers.
+
+* Publishing Model
+Internal records are not published directly by default.
+
+Instead, publication uses a layered model:
+1. internal canonical documents remain in Org
+2. public-facing documents are curated under `org/publish/`
+3. the site repo consumes those curated publish docs
+4. Hugo renders the public site
+
+This keeps the public layer readable and intentional without forcing operational records to double as polished publication artifacts.
+
+* Site Layer
+The current site lives in the workspace under:
+- `projects/code/www`
+
+It is a Hugo site that renders curated public docs and deploys through GitHub Pages to:
+- `https://danhill.us/`
+
+The site is a rendering and deployment surface, not the canonical place where public documents are first shaped.
+
+* Maintenance Model
+A lightweight maintenance agent helps keep the system from drifting.
+
+Its job is to:
+- detect drift
+- perform small safe hygiene fixes
+- preserve aggressively while reducing clutter in canonical surfaces
+- raise review-needed issues instead of freelancing major semantic or structural changes
+
+This keeps the system from silently rotting without turning maintenance into uncontrolled bureaucracy.
+
+* Design Principles
+A few principles hold the whole system together:
+- internal truth stays canonical
+- public docs are promoted, not improvised at the last minute
+- one thing should have one clear home
+- preservation matters when the system is still stabilizing
+- small reversible maintenance is good; uncontrolled reorganization is not
+- human readability matters as much as machine structure
+
+* Current Direction
+The system is intentionally still evolving.
+
+But the direction is now clearer:
+- OpenClaw handles execution and automation
+- Org holds internal truth
+- the workspace model governs payload placement
+- `publish/` handles curated public docs
+- the site renders the public layer
+- maintenance keeps drift under control
+
+That separation is what makes the whole thing workable.
