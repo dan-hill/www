@@ -1,0 +1,127 @@
+#+title: File Management System
+#+date: 2026-03-23
+#+filetags: :publish:docs:files:workspace:
+
+* Overview
+The file management system defines how =C:\Users\mail\workspace= is organized so files have
+clear canonical homes, predictable placement rules, and a stable boundary between operational
+records and working payload.
+
+It is designed to keep the workspace legible without turning every folder decision into a
+bureaucratic exercise.
+
+* Purpose
+The system exists to answer a few recurring questions clearly:
+- what belongs in the control plane versus payload roots
+- when something should stay with a project instead of moving into a global library
+- how to distinguish active material from intake or retained archive
+- how to keep workspace structure stable as projects and tooling evolve
+
+The goal is not maximal neatness. The goal is retrieval, coherence, and low ambiguity.
+
+* Core Model
+The workspace uses three classes of top-level roots.
+
+** Control plane
+- =org/= holds authoritative plans, notes, decisions, specs, indexes, and coordination material.
+
+** Payload roots
+- =projects/=
+- =docs/=
+- =media/=
+- =data/=
+- =ops/=
+- =bin/=
+
+These hold the actual working files, assets, binaries, documents, and data that the control plane
+refers to.
+
+** Lifecycle roots
+- =scratch/=
+- =archive/=
+
+These exist for incoming, unresolved, or retained inactive material.
+
+A shorter summary:
+
+#+begin_quote
+=org/= stores the meaning of things.
+Payload roots store the things themselves.
+Lifecycle roots handle ambiguity and retained inactive material.
+#+end_quote
+
+* Placement Rules
+Placement follows a simple precedence order.
+
+1. Control plane beats payload.
+2. Within payload, project-local material beats global placement.
+3. Within global placement, role beats format, source, and vendor.
+4. Lifecycle roots are for unresolved intake or intentionally retained inactive material.
+
+This means, for example:
+- an authoritative spec belongs in =org/= even if it is just a text file
+- active project payload usually belongs under =projects/=
+- a passive manual belongs in =docs/=
+- personal media libraries belong in =media/=
+- unresolved incoming material belongs in =scratch/=
+
+* Approved Top-Level Roots
+The approved top-level roots are:
+- =archive/=
+- =bin/=
+- =data/=
+- =docs/=
+- =media/=
+- =ops/=
+- =org/=
+- =projects/=
+- =scratch/=
+
+A reserved =state/= root exists only as a future escape hatch for explicitly adopted app-state.
+It is not part of the normal workspace layout.
+
+* Root Roles
+** org
+The control-plane root for notes, specs, plans, decisions, runbooks, and other authoritative
+meaning-bearing records.
+
+** projects
+The default payload root for active or maintained work. Domain buckets such as =projects/code/=
+or =projects/cad/= are preferred when they reflect real working domains.
+
+** docs
+Passive human-facing documents whose main value is reading, reference, or recordkeeping rather
+than active operational control.
+
+** media
+Consumption media and passive personal media libraries that are not tied to one active project.
+The current model also explicitly allows =media/printables/= for reusable printable artifacts that
+are not best treated as project-local work.
+
+** data
+Structured or machine-oriented payload.
+
+** ops
+Operational payload that is not itself the control-plane record.
+
+** bin
+Runnable tools, binaries, and related executable payload.
+
+** scratch / archive
+Lifecycle roots for unresolved intake or intentionally retained inactive material.
+
+* Design Principles
+A few principles drive the system:
+- one file tree should have one canonical home
+- project cohesion should beat scattering active work across unrelated global folders
+- role should beat format
+- conservative moves are better than chaotic reorganizations
+- human retrieval matters more than paper-perfect taxonomy
+- compatibility paths and duplicate copies should exist only for explicit reasons
+
+* Current Notes
+The file-management spec is normative for the workspace, but it is intentionally conservative.
+It leaves room for future refinement while keeping the current model simple enough to use in
+real daily work.
+
+This published document is a public-facing summary of the model, not the full internal spec.
