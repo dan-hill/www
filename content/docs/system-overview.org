@@ -3,50 +3,162 @@
 #+filetags: :publish:docs:system:
 
 * Overview
-This system is a local-first operating environment built around OpenClaw, Org, a structured workspace,
-and a curated publishing layer.
+This system is a local-first operating environment built around five major layers:
+- OpenClaw as the assistant and automation runtime
+- Org as the internal control plane
+- a structured workspace as the payload layer
+- a curated publish layer for public-facing documents
+- a maintenance loop that keeps the whole thing from drifting apart
 
-The goal is not to make everything look neat on paper. The goal is to keep work, notes, files,
-automation, and publication coherent enough that they can evolve without constantly dissolving into drift.
+What matters is not any one tool by itself. The value comes from the way the parts are separated.
+Each layer has a different job, and that separation makes it possible to evolve the system without
+constantly blurring truth, execution, storage, and publication into one pile.
 
-* Core Layers
-** OpenClaw
-OpenClaw is the assistant and automation runtime.
+The system exists because ordinary digital life tends to decay in predictable ways:
+- files drift into random folders
+- projects get spread across too many tools
+- public-facing docs diverge from internal reality
+- automation gains power before it gains boundaries
+- cleanup only happens after a mess has already formed
+
+This setup is an attempt to answer those failure modes directly.
+
+* The Main Design Goal
+The core goal is coherence.
+
+In practice, that means being able to answer questions like these without hand-waving:
+- what is the authoritative internal record for this thing?
+- where does the actual payload live?
+- what is safe to publish?
+- what is just a derived presentation layer?
+- what can automation fix on its own, and what still needs review?
+
+A lot of systems fail because they optimize one layer while quietly collapsing another.
+For example:
+- a note system may become beautifully structured but disconnected from real files
+- a project tracker may become active while the actual project details live somewhere else
+- a website may become the accidental source of truth for docs that should have remained internal
+- automation may become aggressive before the underlying structure is trustworthy
+
+This system tries to resist those tendencies by keeping roles explicit.
+
+* Layer 1: OpenClaw
+** What it is
+OpenClaw is the assistant runtime and orchestration layer.
 
 It provides:
-- the main conversational assistant
-- dedicated helper agents such as heartbeat, ops, and maintenance
-- scheduled jobs and background automation
-- node access into the surrounding environment
+- the main assistant session
+- additional helper agents such as ops, heartbeat, hooks, and maintenance
+- scheduled jobs
+- routing and session handling
+- tool execution
+- access to surrounding nodes and environments
 
-OpenClaw is the execution and orchestration layer, not the canonical store of long-term truth.
+** Why it exists as its own layer
+OpenClaw is where action happens.
 
-** Org
-The Org layer is the internal control plane.
+That includes:
+- answering questions
+- running diagnostics
+- scheduling periodic checks
+- coordinating maintenance
+- interacting with files, repos, and services
+
+But action is not the same thing as truth.
+
+If the assistant runtime also became the canonical place where the system's durable meaning lived,
+then every behavioral change, tool quirk, or runtime inconsistency would threaten the integrity of
+long-term structure.
+
+That is why OpenClaw is treated as the execution layer rather than the sole source of durable truth.
+
+** Why that matters
+This separation makes several things possible:
+- the assistant can change behavior without redefining the system model every time
+- multiple agents can operate within one shared operating model
+- scheduled automation can be useful without becoming the owner of the underlying knowledge
+- the control plane can remain stable even when runtime details are still evolving
+
+In short: OpenClaw runs the system, but it does not get to silently redefine it.
+
+* Layer 2: Org as the Control Plane
+** What it is
+The Org layer is the canonical internal operating system.
 
 It holds:
-- system rules and operating model
-- project records
-- decisions and status
+- the system contract
+- current status and integrity notes
+- decisions and rationale
 - infrastructure notes
+- project records
 - maintenance and publishing policy
+- other meaning-bearing operational documents
 
-Org is where the meaning of the system lives.
+** Why Org is the control plane
+The control plane is where meaning lives.
 
-** Workspace file system
-The broader workspace holds the actual payload.
+That means it should hold things like:
+- what the system is supposed to do
+- what the current state actually is
+- what decisions have already been made
+- what models are canonical
+- what workflows are intended going forward
 
-A simplified model:
+The control plane should not be the same thing as a generic docs bucket.
+It is a special-purpose root that exists specifically to hold the authoritative internal understanding
+of the system.
+
+** Why that matters
+This avoids several common failures:
+- operational decisions getting buried in random markdown files
+- project structure being inferred from ad hoc notes
+- runtime memory becoming the only place context exists
+- canonical rules being spread implicitly across too many unrelated files
+
+Org acts as the place where internal truth is made explicit enough to survive session loss,
+partial recovery, and tool churn.
+
+* Layer 3: The Workspace File System
+** What it is
+The workspace is the payload layer that holds the actual files being managed.
+
+The current top-level model is:
 - `org/` = control plane
 - `projects/`, `docs/`, `media/`, `data/`, `ops/`, `bin/` = payload roots
 - `scratch/`, `archive/` = lifecycle roots
 
-This split keeps authoritative records separate from the files, binaries, media, and data they describe.
+** Why there is a separate payload layer
+A control plane cannot replace the files themselves.
 
-* Project Model
+The system needs a place for:
+- source code
+- CAD files
+- reference documents
+- media libraries
+- binaries
+- structured datasets
+- operational artifacts
+
+Those things should live in real, usable filesystem locations rather than being forced into the note
+system just because the note system is well structured.
+
+** Why the root split matters
+The workspace model exists to keep these categories from bleeding into one another.
+
+For example:
+- `org/` should hold an authoritative project record, not the CAD export itself
+- `projects/` should hold active project payload, not every note about the project's meaning
+- `docs/` should hold passive reference material, not become a hidden control plane
+- `archive/` should preserve old material without pretending it is still live canonical state
+
+This makes file placement easier to reason about because the workspace is organized by role,
+not by every possible format, vendor, or source.
+
+* Layer 4: The Project Model
+** What it is
 Projects use one canonical file per project.
 
-Each project file is structured for both human readability and operational clarity, with sections for:
+Each project file is structured with these top-level sections:
 - Overview
 - Tasks
 - Spec
@@ -54,57 +166,214 @@ Each project file is structured for both human readability and operational clari
 - Decisions
 - References
 
-The project file is the canonical home of the project rather than one more fragment in a pile of ledgers.
+** Why one canonical file per project
+The system originally risked drifting into a more fragmented model where:
+- one ledger tracked projects
+- another tracked tasks
+- another tracked requirements
+- and per-project files held overlapping detail
 
-* Publishing Model
-Internal records are not published directly by default.
+That would have created multiple competing places to look for the same project.
 
-Instead, publication uses a layered model:
+Instead, the project file itself became canonical.
+That means the project has one obvious home, and the internal structure of that file carries the
+rest of the project's shape.
+
+** Why those sections exist
+Each section solves a different problem:
+- `Overview` identifies the project and its current state
+- `Tasks` tracks the actual work to do
+- `Spec` captures the intended end state, constraints, or design shape
+- `Notes` allows looser working thought without forcing false structure
+- `Decisions` records durable choices with rationale
+- `References` holds supporting material
+
+The point is not formalism for its own sake.
+The point is to keep the project readable to a human while still structured enough to maintain reliably.
+
+** Why this matters
+Without a strong project model, the system would drift into:
+- some work tracked in tasks
+- some buried in prose
+- some implied in old imports
+- some only remembered conversationally
+
+The one-file-per-project model reduces that ambiguity.
+
+* Layer 5: The Publish Layer
+** What it is
+The publish model keeps internal truth separate from public-facing explanation.
+
+The current model is:
 1. internal canonical documents remain in Org
-2. public-facing documents are curated under `org/publish/`
-3. the site repo consumes those curated publish docs
+2. curated public-facing documents are created under `org/publish/`
+3. the site repo consumes those curated docs
 4. Hugo renders the public site
 
-This keeps the public layer readable and intentional without forcing operational records to double as polished publication artifacts.
+There is also a governance document at:
+- `org/publish.org`
 
-* Site Layer
-The current site lives in the workspace under:
+And a content layer split between:
+- `org/publish/docs/` for non-project public docs
+- `org/publish/projects/` for project-specific public docs
+
+** Why this layer exists
+Internal records are designed for operating the system.
+They contain things like:
+- active tasks
+- rough notes
+- operational decisions
+- partial reconstruction details
+- private or internal-only context
+
+That is not the same thing as a clean public explanation.
+
+If internal docs were published raw, the public layer would either become noisy and unsafe,
+or the internal layer would become artificially sanitized and lose its usefulness.
+
+The publish layer solves that by introducing an intentional boundary.
+
+** Why the site repo is not the canonical source
+The site repo is treated as:
+- rendering layer
+- deployment layer
+- presentation layer
+
+It is not supposed to be the first place public docs are shaped, because doing so would make the
+public website the accidental source of truth for documentation that should really be governed upstream.
+
+The publish layer keeps the site downstream from the content model.
+
+* Layer 6: The Site Layer
+** What it is
+The current public site lives in the workspace under:
 - `projects/code/www`
 
-It is a Hugo site that renders curated public docs and deploys through GitHub Pages to:
+It is a Hugo site that deploys via GitHub Pages to:
 - `https://danhill.us/`
 
-The site is a rendering and deployment surface, not the canonical place where public documents are first shaped.
+** Why it is a separate layer
+A website has a different job than a control plane or a publish layer.
 
-* Maintenance Model
-A lightweight maintenance agent helps keep the system from drifting.
+A website should:
+- render content
+- present information clearly
+- be deployment-oriented
+- stay focused on public consumption
 
-Its job is to:
+It should not be the place where internal policy is negotiated or where operational records are stored.
+
+** Why this matters
+Separating the site layer means:
+- site redesign does not redefine internal truth
+- public docs can be improved without changing underlying internal records
+- deployment mechanics stay downstream from documentation intent
+
+That is much healthier than letting a theme, generator, or website directory become the hidden center
+of the whole system.
+
+* Layer 7: Maintenance
+** What it is
+A dedicated maintenance agent helps detect drift and perform small safe hygiene work.
+
+The current implementation includes:
+- a first-class maintenance agent
+- a maintenance policy
+- a cadence file
+- a recurring cron job that invokes the maintenance agent
+
+** Why this layer exists
+Systems drift even when their design is good.
+
+Over time, things like these happen:
+- duplicate journal fragments appear
+- stale references accumulate
+- backup files leak into canonical surfaces
+- path assumptions lag reality
+- publish flow gets bypassed
+- project structure regresses quietly
+
+Maintenance exists to catch that before the system requires another full archaeology dig.
+
+** Why it is intentionally limited
+The maintenance agent is not meant to become a roaming bureaucrat.
+It is allowed to:
 - detect drift
-- perform small safe hygiene fixes
-- preserve aggressively while reducing clutter in canonical surfaces
-- raise review-needed issues instead of freelancing major semantic or structural changes
+- perform small reversible fixes
+- archive clutter instead of deleting it
+- raise issues that require review
 
-This keeps the system from silently rotting without turning maintenance into uncontrolled bureaucracy.
+It is not meant to:
+- silently restructure the system
+- redefine taxonomy
+- merge or split semantic content on its own when evidence is ambiguous
+- publish material automatically just because it looks plausible
 
-* Design Principles
-A few principles hold the whole system together:
-- internal truth stays canonical
-- public docs are promoted, not improvised at the last minute
-- one thing should have one clear home
-- preservation matters when the system is still stabilizing
-- small reversible maintenance is good; uncontrolled reorganization is not
-- human readability matters as much as machine structure
+That balance matters.
+A maintenance loop is valuable only if it reduces drift without becoming another source of it.
+
+* How the Layers Fit Together
+A useful shorthand is this:
+
+- OpenClaw executes
+- Org defines
+- the workspace stores
+- projects organize work
+- publish curates
+- the site presents
+- maintenance preserves coherence
+
+Each part constrains the others.
+
+For example:
+- OpenClaw can act, but Org defines what is canonical
+- Org can define, but the workspace still has to hold the real payload
+- projects can track real work, but publishing determines what becomes public
+- the site can present docs, but publish governs what enters the site
+- maintenance can clean drift, but policy limits what it may change autonomously
+
+That network of boundaries is what keeps the system from collapsing into one overpowered tool or one overgrown folder.
+
+* Why the Separation is Worth It
+At first glance, this may seem like more layers than necessary.
+In practice, the layers reduce confusion.
+
+Without them, the system would trend toward:
+- public docs shaped directly inside the website repo
+- projects split across multiple ledgers and tools
+- automation making semantic decisions without stable upstream policy
+- canonical files clogged with backup noise
+- no clean distinction between internal and public truth
+
+The layered model is how the system resists that.
+
+It is not about abstract purity.
+It is about keeping the system workable when real files, real automation, real projects, and real publishing all have to coexist.
 
 * Current Direction
-The system is intentionally still evolving.
+The system is still evolving, but the direction is now much clearer than it was during recovery.
 
-But the direction is now clearer:
-- OpenClaw handles execution and automation
-- Org holds internal truth
-- the workspace model governs payload placement
-- `publish/` handles curated public docs
-- the site renders the public layer
-- maintenance keeps drift under control
+The current intended direction is:
+- OpenClaw remains the assistant and automation runtime
+- Org remains the canonical internal control plane
+- the workspace file model remains the payload structure
+- projects remain one-file-per-project
+- `publish/` remains the curated public-doc layer
+- the Hugo site remains downstream presentation and deployment
+- maintenance remains lightweight, bounded, and preservation-first
 
-That separation is what makes the whole thing workable.
+That is the shape that now ties the whole system together.
+
+* Final Summary
+This system is best understood not as one app or one note tree, but as a layered local-first environment.
+
+Its strength comes from keeping different kinds of truth separate:
+- operational truth
+- file payload
+- project structure
+- public explanation
+- deployment surface
+- maintenance behavior
+
+When those layers are explicit, the system can evolve without losing its center.
+That is the real rationale behind the whole design.
